@@ -135,9 +135,10 @@ define('forum/register', [
 				if (results.every(obj => obj.status === 'rejected')) {
 					showSuccess(usernameInput, username_notify, successIcon);
 				} else {
-					showError(usernameInput, username_notify, '[[error:username-taken]]');
+					const desired = (usernameInput.val() || '').trim();
+					const suggestion = `${desired}suffix`;
+					showError(usernameInput, username_notify, `[[error:username-taken, ${suggestion}]]`);
 				}
-
 				callback();
 			});
 		}
